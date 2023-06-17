@@ -67,7 +67,6 @@ public class PersonController {
         return ResponseEntity.ok().body(respon);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<Respon<Person>>  updatePerson(
             @PathVariable int id,
