@@ -1,15 +1,8 @@
 
 
-FROM ubuntu:lastest AS build
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
-RUN ./gradlew bootJar --no-person_api
 
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-COPY --FROM=build /build/libs/person_api-1 jar app.jar
-
-
-ENTRYPOINT ["java","-jar","app.jar"]
-
